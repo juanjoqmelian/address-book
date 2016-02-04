@@ -10,8 +10,8 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.NoSuchElementException;
 
-import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -43,15 +43,13 @@ public class DefaultAddressBookApiTest {
         assertThat(numberOfMales, is(3));
     }
 
-    @Test
-    public void getOldestPerson_shouldReturnNullIfAddressBookIsEmpty() throws IOException {
+    @Test(expected = NoSuchElementException.class)
+    public void getOldestPerson_shouldRaiseNoSuchElementExceptionIfAddressBookIsEmpty() throws IOException {
 
         addressBookProvider = new FilesystemAddressBookProvider(Paths.get("src/test/resources/EmptyAddressBook"));
         addressBookApi = new DefaultAddressBookApi(addressBookProvider);
 
-        Person oldestPerson = addressBookApi.getOldestPerson();
-
-        assertThat(oldestPerson, is(nullValue()));
+        addressBookApi.getOldestPerson();
     }
 
     @Test

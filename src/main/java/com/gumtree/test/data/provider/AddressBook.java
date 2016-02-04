@@ -3,7 +3,6 @@ package com.gumtree.test.data.provider;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -45,6 +44,7 @@ public class AddressBook {
     public boolean isEmpty() {
         return people.isEmpty();
     }
+
 
     @Override
     public boolean equals(Object o) {
