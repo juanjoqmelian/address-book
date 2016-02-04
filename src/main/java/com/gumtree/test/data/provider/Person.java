@@ -1,4 +1,4 @@
-package com.gumtree.test.data;
+package com.gumtree.test.data.provider;
 
 
 import org.joda.time.DateTime;
@@ -10,14 +10,14 @@ import java.util.Objects;
  * NOTE : Joda API DateTime class is immutable, so there's no need of defensive copies in the
  * way that was required for Date class.
  */
-public final class AddressRecord {
+public final class Person {
 
     private final String name;
     private final Gender gender;
     private final DateTime dateOfBirth;
 
 
-    public AddressRecord(String name, Gender gender, DateTime dateOfBirth) {
+    public Person(String name, Gender gender, DateTime dateOfBirth) {
         this.name = name;
         this.gender = gender;
         this.dateOfBirth = dateOfBirth;
@@ -41,7 +41,7 @@ public final class AddressRecord {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AddressRecord that = (AddressRecord) o;
+        Person that = (Person) o;
         return Objects.equals(name, that.name) &&
                 Objects.equals(gender, that.gender) &&
                 Objects.equals(dateOfBirth, that.dateOfBirth);

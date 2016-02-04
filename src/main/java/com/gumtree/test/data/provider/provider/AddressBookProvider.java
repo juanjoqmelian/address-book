@@ -1,5 +1,7 @@
-package com.gumtree.test.data;
+package com.gumtree.test.data.provider.provider;
 
+
+import com.gumtree.test.data.provider.AddressBook;
 
 /**
  * Populates an address book

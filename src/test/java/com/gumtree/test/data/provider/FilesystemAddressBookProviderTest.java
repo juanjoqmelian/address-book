@@ -1,6 +1,8 @@
-package com.gumtree.test.data;
+package com.gumtree.test.data.provider;
 
 
+import com.gumtree.test.data.provider.provider.AddressBookProvider;
+import com.gumtree.test.data.provider.provider.FilesystemAddressBookProvider;
 import org.joda.time.DateTime;
 import org.junit.Test;
 
@@ -28,11 +30,11 @@ public class FilesystemAddressBookProviderTest {
     public void loadData_shouldLoadAValidAddressBookFromFilesystem() throws IOException {
 
         final AddressBook expectedAddressBook = new AddressBook(
-                new AddressRecord("Bill McKnight", Gender.MALE, new DateTime(1977, 3, 16, 0, 0)),
-                new AddressRecord("Paul Robinson", Gender.MALE, new DateTime(1985, 1, 15, 0, 0)),
-                new AddressRecord("Gemma Lane", Gender.FEMALE, new DateTime(1991, 11, 20, 0, 0)),
-                new AddressRecord("Sarah Stone", Gender.FEMALE, new DateTime(1980, 9, 20, 0, 0)),
-                new AddressRecord("Wes Jackson", Gender.MALE, new DateTime(1974, 8, 14, 0, 0))
+                new Person("Bill McKnight", Gender.MALE, new DateTime(1977, 3, 16, 0, 0)),
+                new Person("Paul Robinson", Gender.MALE, new DateTime(1985, 1, 15, 0, 0)),
+                new Person("Gemma Lane", Gender.FEMALE, new DateTime(1991, 11, 20, 0, 0)),
+                new Person("Sarah Stone", Gender.FEMALE, new DateTime(1980, 9, 20, 0, 0)),
+                new Person("Wes Jackson", Gender.MALE, new DateTime(1974, 8, 14, 0, 0))
         );
 
         final AddressBookProvider addressBookProvider = new FilesystemAddressBookProvider(Paths.get("src/test/resources/AddressBook"));

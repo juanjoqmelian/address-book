@@ -1,8 +1,9 @@
 package com.gumtree.test.api;
 
 
-import com.gumtree.test.data.AddressBook;
-import com.gumtree.test.data.AddressBookProvider;
+import com.gumtree.test.data.provider.AddressBook;
+import com.gumtree.test.data.provider.Person;
+import com.gumtree.test.data.provider.provider.AddressBookProvider;
 
 public class DefaultAddressBookApi implements AddressBookApi {
 
@@ -17,5 +18,10 @@ public class DefaultAddressBookApi implements AddressBookApi {
     @Override
     public int getNumberOfMales() {
         return addressBook.getNumberOfMales();
+    }
+
+    @Override
+    public Person getOldestPerson() {
+        return addressBook.getOldestPerson();
     }
 }
