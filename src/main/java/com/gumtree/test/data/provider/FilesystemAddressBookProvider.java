@@ -1,4 +1,4 @@
-package com.gumtree.test.data.provider.provider;
+package com.gumtree.test.data.provider;
 
 
 import com.google.common.base.Strings;

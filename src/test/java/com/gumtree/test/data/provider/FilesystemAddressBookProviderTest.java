@@ -4,8 +4,6 @@ package com.gumtree.test.data.provider;
 import com.gumtree.test.data.AddressBook;
 import com.gumtree.test.data.Gender;
 import com.gumtree.test.data.Person;
-import com.gumtree.test.data.provider.provider.AddressBookProvider;
-import com.gumtree.test.data.provider.provider.FilesystemAddressBookProvider;
 import org.joda.time.DateTime;
 import org.junit.Rule;
 import org.junit.Test;
