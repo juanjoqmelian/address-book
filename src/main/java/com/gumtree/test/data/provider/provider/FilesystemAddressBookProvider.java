@@ -12,7 +12,6 @@ import org.joda.time.format.DateTimeFormatter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,21 +22,21 @@ public class FilesystemAddressBookProvider implements AddressBookProvider {
 
     private static final String DELIMITER = ",";
 
-    private Set<Person> people;
+    private AddressBook addressBook;
 
 
     public FilesystemAddressBookProvider(final Path source) throws IOException {
-        people = readAddressRecordsFromPath(source);
+        addressBook = readAddressRecordsFromPath(source);
     }
 
 
     @Override
     public AddressBook loadData() {
-        return new AddressBook((Person[]) people.toArray(new Person[people.size()]));
+        return addressBook;
     }
 
 
-    private Set<Person> readAddressRecordsFromPath(Path source) throws IOException {
+    private AddressBook readAddressRecordsFromPath(Path source) throws IOException {
 
         Set<Person> people = new HashSet<>();
 
@@ -59,7 +58,7 @@ public class FilesystemAddressBookProvider implements AddressBookProvider {
             throw new IllegalStateException("Data seems to be wrong in filesystem. Please check the status of your file!");
         }
 
-        return people;
+        return new AddressBook((Person[]) people.toArray(new Person[people.size()]));
     }
 
 

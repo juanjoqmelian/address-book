@@ -159,24 +159,4 @@ public class DefaultAddressBookApiTest {
 
         addressBookApi.getDaysOlder("Bi", "Paul");
     }
-
-    @Test
-    public void shouldRaiseIllegalStateExceptionIfGenderIsCorruptedForSomeElement() throws IOException {
-
-        expectedException.expect(IllegalStateException.class);
-        expectedException.expectMessage("Data seems to be wrong in filesystem. Please check the status of your file!");
-
-        addressBookProvider = new FilesystemAddressBookProvider(Paths.get("src/test/resources/MissingGenderAddressBook"));
-        addressBookApi = new DefaultAddressBookApi(addressBookProvider);
-    }
-
-    @Test
-    public void shouldRaiseIllegalStateExceptionIfDateOfBirthIsCorruptedForSomeElement() throws IOException {
-
-        expectedException.expect(IllegalStateException.class);
-        expectedException.expectMessage("Data seems to be wrong in filesystem. Please check the status of your file!");
-
-        addressBookProvider = new FilesystemAddressBookProvider(Paths.get("src/test/resources/MissingDateAddressBook"));
-        addressBookApi = new DefaultAddressBookApi(addressBookProvider);
-    }
 }

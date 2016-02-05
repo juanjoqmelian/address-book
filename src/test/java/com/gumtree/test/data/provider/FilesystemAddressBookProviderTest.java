@@ -4,7 +4,9 @@ package com.gumtree.test.data.provider;
 import com.gumtree.test.data.provider.provider.AddressBookProvider;
 import com.gumtree.test.data.provider.provider.FilesystemAddressBookProvider;
 import org.joda.time.DateTime;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import java.io.IOException;
 import java.nio.file.NoSuchFileException;
@@ -14,6 +16,9 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 public class FilesystemAddressBookProviderTest {
+
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
 
 
     @Test
@@ -50,4 +55,21 @@ public class FilesystemAddressBookProviderTest {
         new FilesystemAddressBookProvider(Paths.get("/FakePath"));
     }
 
+    @Test
+    public void shouldRaiseIllegalStateExceptionIfGenderIsCorruptedForSomeElement() throws IOException {
+
+        expectedException.expect(IllegalStateException.class);
+        expectedException.expectMessage("Data seems to be wrong in filesystem. Please check the status of your file!");
+
+        new FilesystemAddressBookProvider(Paths.get("src/test/resources/MissingGenderAddressBook"));
+    }
+
+    @Test
+    public void shouldRaiseIllegalStateExceptionIfDateOfBirthIsCorruptedForSomeElement() throws IOException {
+
+        expectedException.expect(IllegalStateException.class);
+        expectedException.expectMessage("Data seems to be wrong in filesystem. Please check the status of your file!");
+
+        new FilesystemAddressBookProvider(Paths.get("src/test/resources/MissingDateAddressBook"));
+    }
 }

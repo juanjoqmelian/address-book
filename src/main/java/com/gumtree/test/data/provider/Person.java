@@ -31,10 +31,6 @@ public final class Person {
         return name;
     }
 
-    public Gender getGender() {
-        return gender;
-    }
-
     public DateTime getDateOfBirth() {
         return dateOfBirth;
     }
@@ -57,7 +53,7 @@ public final class Person {
 
     @Override
     public String toString() {
-        return "AddressRecord{" +
+        return "Person{" +
                 "name='" + name + '\'' +
                 ", gender=" + gender +
                 ", dateOfBirth=" + dateOfBirth +

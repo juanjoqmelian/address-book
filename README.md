@@ -38,3 +38,4 @@ Good Luck!
 4. If the second person is older than the first one, then a negative number will be returned.
 5. All the fields are mandatory. App will ignore those elements whose name is empty and will not run if any of
    the rest of the elements are not valid.
+6. Address book has to be immutable and records cannot be added or modified.
