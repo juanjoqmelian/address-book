@@ -19,7 +19,9 @@ import java.util.Set;
  */
 public class FilesystemAddressBookProvider implements AddressBookProvider {
 
-    private Set<Person> people = new HashSet<>();
+    private static final String DELIMITER = ",";
+
+    private Set<Person> people;
 
 
     public FilesystemAddressBookProvider(final Path source) throws IOException {
@@ -40,9 +42,10 @@ public class FilesystemAddressBookProvider implements AddressBookProvider {
         DateTimeFormatter dateFormatter = DateTimeFormat.forPattern("dd/MM/yy")
                 .withPivotYear(1950);
 
+        //TODO - Check that elements are not null before trim
         Files.lines(source)
                 .parallel()
-                .map(record -> record.split(","))
+                .map(record -> record.split(DELIMITER))
                 .forEach(fields -> people.add(
                         new Person(fields[0],
                                 Gender.valueOf(fields[1].trim().toUpperCase()),

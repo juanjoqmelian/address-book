@@ -33,7 +33,7 @@ public class DefaultAddressBookApiTest {
     }
 
     @Test
-    public void getNumberOfMales_shouldReturnThreeIfThereAreThreeMalesInAddressBook() throws IOException {
+    public void getNumberOfMales_shouldReturnHowManyMalesAreInTheAddressBook() throws IOException {
 
         addressBookProvider = new FilesystemAddressBookProvider(Paths.get("src/test/resources/AddressBook"));
         addressBookApi = new DefaultAddressBookApi(addressBookProvider);
@@ -53,7 +53,7 @@ public class DefaultAddressBookApiTest {
     }
 
     @Test
-    public void getOldestPerson_shouldReturnTheOldestPersonInTheAddressBook() throws IOException {
+    public void getOldestPerson_shouldReturnWhoIsTheOldestPersonInTheAddressBook() throws IOException {
 
         addressBookProvider = new FilesystemAddressBookProvider(Paths.get("src/test/resources/AddressBook"));
         addressBookApi = new DefaultAddressBookApi(addressBookProvider);
@@ -61,5 +61,27 @@ public class DefaultAddressBookApiTest {
         Person oldestPerson = addressBookApi.getOldestPerson();
 
         assertThat(oldestPerson, is(new Person("Wes Jackson", Gender.MALE, new DateTime(1974, 8, 14, 0, 0))));
+    }
+
+    @Test
+    public void getDaysOlder_shouldReturnZeroIfTheyAreTheSameAge() throws IOException {
+
+        addressBookProvider = new FilesystemAddressBookProvider(Paths.get("src/test/resources/AddressBookWithTwins"));
+        addressBookApi = new DefaultAddressBookApi(addressBookProvider);
+
+        int daysOlder = addressBookApi.getDaysOlder("Gemma", "Anne");
+
+        assertThat(daysOlder, is(0));
+    }
+
+    @Test
+    public void getDaysOlder_shouldReturnHowManyDaysOlderIsBillThanPaul() throws IOException {
+
+        addressBookProvider = new FilesystemAddressBookProvider(Paths.get("src/test/resources/AddressBook"));
+        addressBookApi = new DefaultAddressBookApi(addressBookProvider);
+
+        int daysOlder = addressBookApi.getDaysOlder("Bill", "Paul");
+
+        assertThat(daysOlder, is(2862));
     }
 }
