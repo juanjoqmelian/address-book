@@ -16,7 +16,6 @@ public class DefaultAddressBookApi implements AddressBookApi {
 
 
     public DefaultAddressBookApi(final AddressBookProvider addressBookProvider) {
-
         addressBook = addressBookProvider.loadData();
     }
 

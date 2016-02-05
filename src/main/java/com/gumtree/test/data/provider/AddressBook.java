@@ -33,9 +33,8 @@ public class AddressBook {
 
         return people.stream()
                 .min((o1, o2) -> {
-                    if (o1.getDateOfBirth().isBefore(o2.getDateOfBirth())) return -1;
                     if (o1.getDateOfBirth().isAfter(o2.getDateOfBirth())) return 1;
-                    return 0;
+                    return -1;
                 }).get();
     }
 

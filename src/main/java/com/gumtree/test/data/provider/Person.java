@@ -6,7 +6,7 @@ import org.joda.time.DateTime;
 import java.util.Objects;
 
 /**
- * Immutable address record that holds the information about an address.
+ * Immutable person object that holds person data.
  * NOTE : Joda API DateTime class is immutable, so there's no need of defensive copies in the
  * way that was required for Date class.
  */
