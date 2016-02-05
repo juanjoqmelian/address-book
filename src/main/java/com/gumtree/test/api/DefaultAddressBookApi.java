@@ -2,8 +2,8 @@ package com.gumtree.test.api;
 
 
 import com.gumtree.test.api.exception.PersonNotFoundException;
-import com.gumtree.test.data.provider.AddressBook;
-import com.gumtree.test.data.provider.Person;
+import com.gumtree.test.data.AddressBook;
+import com.gumtree.test.data.Person;
 import com.gumtree.test.data.provider.provider.AddressBookProvider;
 import org.joda.time.Days;
 

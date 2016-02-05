@@ -2,9 +2,9 @@ package com.gumtree.test.data.provider.provider;
 
 
 import com.google.common.base.Strings;
-import com.gumtree.test.data.provider.AddressBook;
-import com.gumtree.test.data.provider.Gender;
-import com.gumtree.test.data.provider.Person;
+import com.gumtree.test.data.AddressBook;
+import com.gumtree.test.data.Gender;
+import com.gumtree.test.data.Person;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
