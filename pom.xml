@@ -15,6 +15,7 @@
         <junit.version>4.12</junit.version>
         <maven-compiler-plugin.version>3.5</maven-compiler-plugin.version>
         <joda-time.version>2.9.2</joda-time.version>
+        <guava.version>18.0</guava.version>
     </properties>
 
 
@@ -25,6 +26,11 @@
                 <groupId>joda-time</groupId>
                 <artifactId>joda-time</artifactId>
                 <version>${joda-time.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
             </dependency>
 
             <!-- Testing -->
@@ -43,6 +49,10 @@
         <dependency>
             <groupId>joda-time</groupId>
             <artifactId>joda-time</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
         </dependency>
 
         <!-- Testing -->

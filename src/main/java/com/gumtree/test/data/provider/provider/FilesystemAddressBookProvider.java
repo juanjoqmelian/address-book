@@ -1,6 +1,7 @@
 package com.gumtree.test.data.provider.provider;
 
 
+import com.google.common.base.Strings;
 import com.gumtree.test.data.provider.AddressBook;
 import com.gumtree.test.data.provider.Gender;
 import com.gumtree.test.data.provider.Person;
@@ -11,6 +12,7 @@ import org.joda.time.format.DateTimeFormatter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -39,17 +41,30 @@ public class FilesystemAddressBookProvider implements AddressBookProvider {
 
         Set<Person> people = new HashSet<>();
 
-        DateTimeFormatter dateFormatter = DateTimeFormat.forPattern("dd/MM/yy")
-                .withPivotYear(1950);
+        try {
 
-        //TODO - Check that elements are not null before trim
-        Files.lines(source)
-                .parallel()
-                .map(record -> record.split(DELIMITER))
-                .forEach(fields -> people.add(
-                        new Person(fields[0],
-                                Gender.valueOf(fields[1].trim().toUpperCase()),
-                                DateTime.parse(fields[2].trim(), dateFormatter))));
+            DateTimeFormatter dateFormatter = DateTimeFormat.forPattern("dd/MM/yy")
+                    .withPivotYear(1950);
+
+            Files.lines(source)
+                    .parallel()
+                    .map(record -> record.split(DELIMITER))
+                    .filter(fields -> isAValidName(fields[0]))
+                    .forEach(fields -> people.add(
+                            new Person(fields[0],
+                                    Gender.valueOf(fields[1].trim().toUpperCase()),
+                                    DateTime.parse(fields[2].trim(), dateFormatter))));
+
+        } catch (RuntimeException e) {
+            throw new IllegalStateException("Data seems to be wrong in filesystem. Please check the status of your file!");
+        }
+
         return people;
+    }
+
+
+    private boolean isAValidName(String name) {
+        if (name == null) return false;
+        return !Strings.isNullOrEmpty(name.trim());
     }
 }

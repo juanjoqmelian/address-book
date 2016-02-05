@@ -50,6 +50,17 @@ public class DefaultAddressBookApiTest {
         assertThat(numberOfMales, is(3));
     }
 
+    @Test
+    public void getNumberOfMales_shouldIgnorePeopleWithNoNameAndReturnHowManyMalesAreInTheAddressBook() throws IOException {
+
+        addressBookProvider = new FilesystemAddressBookProvider(Paths.get("src/test/resources/MissingNameAddressBook"));
+        addressBookApi = new DefaultAddressBookApi(addressBookProvider);
+
+        int numberOfMales = addressBookApi.getNumberOfMales();
+
+        assertThat(numberOfMales, is(2));
+    }
+
     @Test(expected = NoSuchElementException.class)
     public void getOldestPerson_shouldRaiseNoSuchElementExceptionIfAddressBookIsEmpty() throws IOException {
 
@@ -147,5 +158,25 @@ public class DefaultAddressBookApiTest {
         expectedException.expectMessage("No person with name 'Bi' was found!");
 
         addressBookApi.getDaysOlder("Bi", "Paul");
+    }
+
+    @Test
+    public void shouldRaiseIllegalStateExceptionIfGenderIsCorruptedForSomeElement() throws IOException {
+
+        expectedException.expect(IllegalStateException.class);
+        expectedException.expectMessage("Data seems to be wrong in filesystem. Please check the status of your file!");
+
+        addressBookProvider = new FilesystemAddressBookProvider(Paths.get("src/test/resources/MissingGenderAddressBook"));
+        addressBookApi = new DefaultAddressBookApi(addressBookProvider);
+    }
+
+    @Test
+    public void shouldRaiseIllegalStateExceptionIfDateOfBirthIsCorruptedForSomeElement() throws IOException {
+
+        expectedException.expect(IllegalStateException.class);
+        expectedException.expectMessage("Data seems to be wrong in filesystem. Please check the status of your file!");
+
+        addressBookProvider = new FilesystemAddressBookProvider(Paths.get("src/test/resources/MissingDateAddressBook"));
+        addressBookApi = new DefaultAddressBookApi(addressBookProvider);
     }
 }

@@ -11,7 +11,7 @@ public interface AddressBookProvider {
     /**
      * Populates an address book. Internally is up to the implementation to decide
      * how to retrieve this data (filesystem, database, memory, cache, etc).
-     * @return
+     * @return populated address book
      */
     AddressBook loadData();
 }
