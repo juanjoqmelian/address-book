@@ -32,9 +32,9 @@ Good Luck!
 
 1. People with same data should be considered as duplicates, so there
    was no need to store them twice.
-2. If address book is empty it will return NoSuchElementException.
+2. When trying to know who is the oldest person, if address book is empty it will return NoSuchElementException.
 3. When trying to get 'how many days older', if one of the given names does not match at least any of the existing
-   first names, a PersonNotFoundException will be raised.
+   first names (not including last name), a PersonNotFoundException will be raised.
 4. If the second person is older than the first one, then a negative number will be returned.
 5. All the fields are mandatory. App will ignore those elements whose name is empty and will not run if any of
    the rest of the elements are not valid.
