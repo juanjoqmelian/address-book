@@ -1,12 +1,15 @@
 package com.gumtree.test.api;
 
 
+import com.gumtree.test.api.exception.PersonNotFoundException;
 import com.gumtree.test.data.provider.Gender;
 import com.gumtree.test.data.provider.Person;
 import com.gumtree.test.data.provider.provider.AddressBookProvider;
 import com.gumtree.test.data.provider.provider.FilesystemAddressBookProvider;
 import org.joda.time.DateTime;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -19,6 +22,10 @@ public class DefaultAddressBookApiTest {
 
     private AddressBookApi addressBookApi;
     private AddressBookProvider addressBookProvider;
+
+
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
 
 
     @Test
@@ -53,6 +60,17 @@ public class DefaultAddressBookApiTest {
     }
 
     @Test
+    public void getOldestPerson_shouldReturnTheOnlyExistingPersonIfThereIsOnlyOnePersonInTheAddressBook() throws IOException {
+
+        addressBookProvider = new FilesystemAddressBookProvider(Paths.get("src/test/resources/OnePersonAddressBook"));
+        addressBookApi = new DefaultAddressBookApi(addressBookProvider);
+
+        Person oldestPerson = addressBookApi.getOldestPerson();
+
+        assertThat(oldestPerson, is(new Person("Gemma Lane", Gender.FEMALE, new DateTime(1991, 11, 20, 0, 0))));
+    }
+
+    @Test
     public void getOldestPerson_shouldReturnWhoIsTheOldestPersonInTheAddressBook() throws IOException {
 
         addressBookProvider = new FilesystemAddressBookProvider(Paths.get("src/test/resources/AddressBook"));
@@ -75,6 +93,17 @@ public class DefaultAddressBookApiTest {
     }
 
     @Test
+    public void getDaysOlder_shouldReturnZeroIfWeAreComparingTheSamePerson() throws IOException {
+
+        addressBookProvider = new FilesystemAddressBookProvider(Paths.get("src/test/resources/AddressBookWithTwins"));
+        addressBookApi = new DefaultAddressBookApi(addressBookProvider);
+
+        int daysOlder = addressBookApi.getDaysOlder("Bill", "Bill");
+
+        assertThat(daysOlder, is(0));
+    }
+
+    @Test
     public void getDaysOlder_shouldReturnHowManyDaysOlderIsBillThanPaul() throws IOException {
 
         addressBookProvider = new FilesystemAddressBookProvider(Paths.get("src/test/resources/AddressBook"));
@@ -83,5 +112,40 @@ public class DefaultAddressBookApiTest {
         int daysOlder = addressBookApi.getDaysOlder("Bill", "Paul");
 
         assertThat(daysOlder, is(2862));
+    }
+
+    @Test
+    public void getDaysOlder_shouldReturnHowManyDaysOlderIsPaulThanBillAsANegativeNumberIfBillIsOlderThanPaul() throws IOException {
+
+        addressBookProvider = new FilesystemAddressBookProvider(Paths.get("src/test/resources/AddressBook"));
+        addressBookApi = new DefaultAddressBookApi(addressBookProvider);
+
+        int daysOlder = addressBookApi.getDaysOlder("Paul", "Bill");
+
+        assertThat(daysOlder, is(-2862));
+    }
+
+    @Test
+    public void getDaysOlder_shouldRaisePersonNotFoundExceptionIfPersonDoesNotExist() throws IOException {
+
+        addressBookProvider = new FilesystemAddressBookProvider(Paths.get("src/test/resources/AddressBook"));
+        addressBookApi = new DefaultAddressBookApi(addressBookProvider);
+
+        expectedException.expect(PersonNotFoundException.class);
+        expectedException.expectMessage("No person with name 'Carl' was found!");
+
+        addressBookApi.getDaysOlder("Carl", "Paul");
+    }
+
+    @Test
+    public void getDaysOlder_shouldRaisePersonNotFoundExceptionIfNameDoesNotMatchAtLeastTheFirstName() throws IOException {
+
+        addressBookProvider = new FilesystemAddressBookProvider(Paths.get("src/test/resources/AddressBook"));
+        addressBookApi = new DefaultAddressBookApi(addressBookProvider);
+
+        expectedException.expect(PersonNotFoundException.class);
+        expectedException.expectMessage("No person with name 'Bi' was found!");
+
+        addressBookApi.getDaysOlder("Bi", "Paul");
     }
 }

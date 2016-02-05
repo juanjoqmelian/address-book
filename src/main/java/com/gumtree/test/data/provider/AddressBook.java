@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -22,12 +23,14 @@ public class AddressBook {
 
 
     public int getNumberOfMales() {
+
         return (int) people.parallelStream()
-                .filter(e -> e.getGender().equals(Gender.MALE))
+                .filter(Person::isMale)
                 .count();
     }
 
     public Person getOldestPerson() {
+
         return people.stream()
                 .min((o1, o2) -> {
                     if (o1.getDateOfBirth().isBefore(o2.getDateOfBirth())) {
@@ -40,9 +43,22 @@ public class AddressBook {
                 }).get();
     }
 
+    public Person getPersonByName(String name) {
+
+        Optional<Person> personByNameOptional = people.stream()
+                .filter(person -> person.getName().startsWith(name) && matchesAtLeastFirstName(person, name))
+                .findFirst();
+        return personByNameOptional.get();
+    }
 
     public boolean isEmpty() {
         return people.isEmpty();
+    }
+
+
+
+    private boolean matchesAtLeastFirstName(Person person, String name) {
+        return (person.getName().split(" ")[0].length() <= name.length());
     }
 
 

@@ -23,6 +23,9 @@ public final class Person {
         this.dateOfBirth = dateOfBirth;
     }
 
+    public boolean isMale() {
+        return gender.equals(Gender.MALE);
+    }
 
     public String getName() {
         return name;
