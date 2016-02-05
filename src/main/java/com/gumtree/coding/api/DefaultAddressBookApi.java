@@ -1,10 +1,10 @@
-package com.gumtree.test.api;
+package com.gumtree.coding.api;
 
 
-import com.gumtree.test.api.exception.PersonNotFoundException;
-import com.gumtree.test.data.AddressBook;
-import com.gumtree.test.data.Person;
-import com.gumtree.test.data.provider.AddressBookProvider;
+import com.gumtree.coding.api.exception.PersonNotFoundException;
+import com.gumtree.coding.data.AddressBook;
+import com.gumtree.coding.data.Person;
+import com.gumtree.coding.data.provider.AddressBookProvider;
 
 import java.util.NoSuchElementException;
 

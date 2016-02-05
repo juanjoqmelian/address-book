@@ -1,4 +1,4 @@
-package com.gumtree.test.data;
+package com.gumtree.coding.data;
 
 
 import java.util.Arrays;

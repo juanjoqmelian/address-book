@@ -1,4 +1,4 @@
-package com.gumtree.test.api.exception;
+package com.gumtree.coding.api.exception;
 
 
 public class PersonNotFoundException extends RuntimeException {

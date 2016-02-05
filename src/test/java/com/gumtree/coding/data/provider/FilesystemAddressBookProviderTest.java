@@ -1,9 +1,9 @@
-package com.gumtree.test.data.provider;
+package com.gumtree.coding.data.provider;
 
 
-import com.gumtree.test.data.AddressBook;
-import com.gumtree.test.data.Gender;
-import com.gumtree.test.data.Person;
+import com.gumtree.coding.data.AddressBook;
+import com.gumtree.coding.data.Gender;
+import com.gumtree.coding.data.Person;
 import org.joda.time.DateTime;
 import org.junit.Rule;
 import org.junit.Test;
