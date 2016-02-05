@@ -5,7 +5,6 @@ import com.gumtree.test.api.exception.PersonNotFoundException;
 import com.gumtree.test.data.AddressBook;
 import com.gumtree.test.data.Person;
 import com.gumtree.test.data.provider.AddressBookProvider;
-import org.joda.time.Days;
 
 import java.util.NoSuchElementException;
 
@@ -23,13 +22,13 @@ public class DefaultAddressBookApi implements AddressBookApi {
     @Override
     public int getNumberOfMales() {
 
-        return addressBook.getNumberOfMales();
+        return addressBook.numberOfMales();
     }
 
     @Override
     public Person getOldestPerson() {
 
-        return addressBook.getOldestPerson();
+        return addressBook.oldestPerson();
     }
 
     @Override
@@ -37,7 +36,7 @@ public class DefaultAddressBookApi implements AddressBookApi {
 
         Person firstPerson = getPersonByName(firstPersonName);
         Person secondPerson = getPersonByName(secondPersonName);
-        return Days.daysBetween(firstPerson.getDateOfBirth(), secondPerson.getDateOfBirth()).getDays();
+        return firstPerson.daysOlderThan(secondPerson);
     }
 
 

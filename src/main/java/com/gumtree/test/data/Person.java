@@ -2,6 +2,7 @@ package com.gumtree.test.data;
 
 
 import org.joda.time.DateTime;
+import org.joda.time.Days;
 
 import java.util.Objects;
 
@@ -21,6 +22,11 @@ public final class Person {
         this.name = name;
         this.gender = gender;
         this.dateOfBirth = dateOfBirth;
+    }
+
+
+    public int daysOlderThan(Person person) {
+        return Days.daysBetween(this.getDateOfBirth(), person.getDateOfBirth()).getDays();
     }
 
     public boolean isMale() {

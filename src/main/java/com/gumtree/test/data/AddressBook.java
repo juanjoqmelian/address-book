@@ -22,14 +22,14 @@ public class AddressBook {
     }
 
 
-    public int getNumberOfMales() {
+    public int numberOfMales() {
 
         return (int) people.parallelStream()
                 .filter(Person::isMale)
                 .count();
     }
 
-    public Person getOldestPerson() {
+    public Person oldestPerson() {
 
         return people.stream()
                 .min((o1, o2) -> {
