@@ -1,6 +1,6 @@
 package com.gumtree.coding.api;
 
-import com.gumtree.coding.data.Person;
+import com.gumtree.coding.domain.Person;
 
 /**
  * Address book API that provides some interfaces to gather data about the address book.

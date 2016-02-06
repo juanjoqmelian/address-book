@@ -1,4 +1,4 @@
-package com.gumtree.coding.data;
+package com.gumtree.coding.domain;
 
 
 import org.joda.time.DateTime;

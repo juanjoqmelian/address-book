@@ -1,10 +1,10 @@
-package com.gumtree.coding.data.provider;
+package com.gumtree.coding.provider;
 
 
 import com.google.common.base.Strings;
-import com.gumtree.coding.data.AddressBook;
-import com.gumtree.coding.data.Gender;
-import com.gumtree.coding.data.Person;
+import com.gumtree.coding.domain.AddressBook;
+import com.gumtree.coding.domain.Gender;
+import com.gumtree.coding.domain.Person;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;

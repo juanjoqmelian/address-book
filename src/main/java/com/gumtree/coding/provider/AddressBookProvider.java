@@ -1,7 +1,7 @@
-package com.gumtree.coding.data.provider;
+package com.gumtree.coding.provider;
 
 
-import com.gumtree.coding.data.AddressBook;
+import com.gumtree.coding.domain.AddressBook;
 
 /**
  * Populates an address book
